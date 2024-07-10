@@ -24,7 +24,9 @@ public class Service {
 
     public String createNewUser(String jsonUser) throws Exception {
         HttpPost request = new HttpPost(BASE_URL);
-        request.setEntity(new StringEntity(jsonUser));
+        StringEntity stringEntity = new StringEntity(jsonUser, "UTF-8");
+        stringEntity.setContentType("application/json");
+        request.setEntity(stringEntity);
 
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             HttpEntity entity = response.getEntity();
